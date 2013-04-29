@@ -41,23 +41,7 @@ double Thermistor(int RawADC) {
 
   for (;;)
  {
-  digitalWrite(Pump, 1);
-  printf ("Pump Is On\n") ;
-  sleep(19);
-  digitalWrite(Kettle, 1);
-  printf ("Kettle Is On\n") ;
-  sleep(45);
-  digitalWrite(Pump, 0);
-  printf ("Pump Is Off\n") ;
-  while(Thermistor(digitalRead(TempSensor))<205.0){
-  digitalWrite(Kettle, 1);
-  };
-  printf ("Your Water is At 205 Degrees Fahrenheit\n");
-  digitalWrite(Kettle, 0);
-  printf ("Kettle Is Off\n") ;
-  digitalWrite(Grinder, 1);
-  printf ("Grinder Is On\n") ;
-  while(t<18){
+    while(t<18){
   if (Thermistor(digitalRead(TempSensor))<200.0){
   digitalWrite(Kettle, 1);
   printf ("Kettle Is On\n") ;
@@ -67,44 +51,5 @@ double Thermistor(int RawADC) {
   }
   sleep(1);
   t++;
-  };
-  digitalWrite(Grinder, 0);
-  printf ("Grinder Is Off\n") ;
-  while(Thermistor(digitalRead(TempSensor))<200.0){
-  digitalWrite(Kettle, 1);
-  };
-  digitalWrite(Kettle, 0);
-  printf ("Your Water is At 200 Degrees Fahrenheit, For the Perfect Cup of Coffee\n");
-  digitalWrite(Solenoid, 1);
-  printf ("Solednoid Is On\n") ;
-  sleep(28);
-  digitalWrite(Solenoid, 0);
-  printf ("Solenoid Is Off\n") ;
-  printf ("Coffee Is Brewing\n") ;
-  sleep(60);
-  printf ("Your Coffee Has Been Brewing for One Minute\n") ;
-  sleep(60);
-  printf ("Your Coffee Has Been Brewing for Two Minutes\n") ;
-  sleep(60);
-  printf ("Your Coffee Has Been Brewing for Three Minutes\n") ;
-  sleep(40);
-    Py_Initialize();
-    PyRun_SimpleString ("import sys; sys.path.insert(0, '/home/pi/')");
-    PyObject * pModule = NULL;
-    PyObject * pFunc   = NULL;
-
-    pModule = PyImport_ImportModule("CoffeeDone");
-    pFunc   = PyObject_GetAttrString(pModule, "SendEmail");
-    if(pFunc != NULL) {
-        PyEval_CallObject(pFunc, NULL);
-        Py_Finalize();
-    }
-    else {
-        printf("pFunc returned NULL\n");
-    }
-  sleep(20);
-  printf ("Your Coffee Has Been Brewing for Four Minutes\n") ;
-  printf("Your Coffee is Done Brewing, Please Collect\n");
- return 0 ;
   }
 }
