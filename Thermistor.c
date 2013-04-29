@@ -9,3 +9,12 @@ double Thermistor(int RawADC) {
  Temp = (Temp * 9.0)/ 5.0 + 32.0; // Convert Celcius to Fahrenheit
  return Temp;
 }
+
+int main(void)
+{
+    for(int t = 0, t<5,t++){
+    printf(Temp);
+    sleep(1);
+}
+    return 0;
+}
