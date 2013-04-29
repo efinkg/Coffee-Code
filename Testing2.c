@@ -1,0 +1,23 @@
+#include <python2.6/Python.h>
+#include <stdio.h>
+
+int main() 
+ { 
+      Py_Initialize(); 
+      PyRun_SimpleString ("import sys; sys.path.insert(0, '/home/pi/')");
+
+      PyObject* pModule = NULL; 
+      PyObject* pFunc   = NULL; 
+
+      pModule = PyImport_ImportModule("coffeedone");
+      if(pModule == NULL){
+           printf("Error importing module.");
+           exit(-1);
+      }
+
+
+      pFunc   = PyObject_GetAttrString(pModule, "SendEmail"); 
+      PyEval_CallObject(pFunc, NULL); 
+      Py_Finalize(); 
+      return 0; 
+ }
